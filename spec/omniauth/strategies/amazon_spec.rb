@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe OmniAuth::Strategies::Amazon do
   subject do
-    strategy = OmniAuth::Strategies::Amazon.new(nil, @options || {})
-    strategy.stub(:session) { {  } }
-    strategy
+    OmniAuth::Strategies::Amazon.new(nil, @options || {})
   end
 
   describe '#client' do
@@ -32,7 +30,7 @@ describe OmniAuth::Strategies::Amazon do
       allow(subject).to receive(:full_host).and_return('https://example.com')
       allow(subject).to receive(:script_name).and_return('/sub_uri')
       allow(subject).to receive(:query_string).and_return('?foo=bar')
-      
+
        expect(subject.callback_url).to eq('https://example.com/sub_uri/auth/amazon/callback')
     end
   end
